@@ -9,14 +9,14 @@ USE `ow` ;
 -- Table `ow`.`client`
 -- All clients of OnlineWallet
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `client` ;
+DROP TABLE IF EXISTS client ;
 
-CREATE TABLE IF NOT EXISTS `client` (
-  `idClient` INT(10) NOT NULL AUTO_INCREMENT,
-  `FirstName` CHAR(32) NOT NULL,
-  `LastName` CHAR(32) NOT NULL,
-  `Sts` CHAR(7) NOT NULL,
-  PRIMARY KEY (`idClient`)
+CREATE TABLE IF NOT EXISTS client (
+  idClient INT(10) NOT NULL AUTO_INCREMENT,
+  FirstName CHAR(32) NOT NULL,
+  LastName CHAR(32) NOT NULL,
+  Sts CHAR(7) NOT NULL,
+  PRIMARY KEY (idClient)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
@@ -25,14 +25,16 @@ AUTO_INCREMENT = 1002;
 -- Table `ow`.`account`
 -- All accounts of clients
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `account` ;
+DROP TABLE IF EXISTS account ;
 
-CREATE TABLE IF NOT EXISTS `account` (
-  `idAccount` INT(10) NOT NULL AUTO_INCREMENT,
-  `idClient` INT(10) NOT NULL,
-  `Balance` DECIMAL NOT NULL,
-  `Sts` CHAR(7) NOT NULL,
-  PRIMARY KEY (`idAccount`)
+CREATE TABLE IF NOT EXISTS account (
+  idAccount INT(10) NOT NULL AUTO_INCREMENT,
+  AccountNumber CHAR(30) NOT NULL,
+  idClient INT(10) NOT NULL,
+  Balance DECIMAL NOT NULL,
+  Sts CHAR(7) NOT NULL,
+  PRIMARY KEY (idAccount),
+  FOREIGN KEY (idClient) REFERENCES client(idClient)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
@@ -41,14 +43,14 @@ AUTO_INCREMENT = 1002;
 -- Table `ow`.`trn`
 -- Transaction headers
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `trn` ;
+DROP TABLE IF EXISTS trn;
 
-CREATE TABLE IF NOT EXISTS `trn` (
-  `idTrn` INT(10) NOT NULL AUTO_INCREMENT,
-  `Dt` DATETIME,
-  `Sts` CHAR(7) NOT NULL,
-  `Rem` VARCHAR(500),
-  PRIMARY KEY (`idTrn`)
+CREATE TABLE IF NOT EXISTS trn (
+  idTrn INT(10) NOT NULL AUTO_INCREMENT,
+  Dt DATETIME,
+  Sts CHAR(7) NOT NULL,
+  Rem VARCHAR(500),
+  PRIMARY KEY (idTrn)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
@@ -57,20 +59,37 @@ AUTO_INCREMENT = 1002;
 -- Table `ow`.`trnln`
 -- Transaction lines
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `trnln` ;
+DROP TABLE IF EXISTS trnln ;
 
-CREATE TABLE IF NOT EXISTS `trnln` (
-  `idTrn` INT(10) NOT NULL,
-  `lnTrn` INT(10) NOT NULL,
-  `idAccount` INT(10),
-  `Dr` DECIMAL,
-  `Cr` DECIMAL,
-  PRIMARY KEY (`idTrn`, `lnTrn`)
+CREATE TABLE IF NOT EXISTS trnln (
+  idTrn INT(10) NOT NULL,
+  lnTrn INT(10) NOT NULL,
+  idAccount INT(10),
+  Dr DECIMAL,
+  Cr DECIMAL,
+  PRIMARY KEY (idTrn, lnTrn),
+  FOREIGN KEY (idAccount) REFERENCES account(idAccount)
 )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1002;
 
 
+
+
+
+-- -----------------------------------------------------
+-- Table `Java2_test`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `users` ;
+
+CREATE TABLE IF NOT EXISTS `users` (
+    `UserID` INT(11) NOT NULL AUTO_INCREMENT,
+    `FirstName` CHAR(32) NOT NULL,
+    `LastName` CHAR(32) NOT NULL,
+    PRIMARY KEY (`UserID`)
+  )
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 1002;
 
 
 
