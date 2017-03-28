@@ -11,7 +11,7 @@ public class AccountBuilder {
 
     private AccountBuilder() { }
 
-    public static AccountBuilder createClient() {
+    public static AccountBuilder createAccount() {
         return new AccountBuilder();
     }
 

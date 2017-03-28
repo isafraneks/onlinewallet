@@ -1,4 +1,4 @@
 <dataset>
-    <CLIENT FirstName="Bob" LastName="Doe"/>
-    <CLIENT FirstName="Alice" LastName="Foo"/>
+    <CLIENT FirstName="Bob" LastName="Doe" Sts="A"/>
+    <CLIENT FirstName="Alice" LastName="Foo" Sts="C"/>
 </dataset>
