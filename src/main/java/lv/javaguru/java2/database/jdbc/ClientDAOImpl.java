@@ -33,7 +33,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
                 client.setIdClient(rs.getLong(1));
             }
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.save()");
+            System.out.println("Exception while execute ClientDAOImpl.save()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -52,16 +52,16 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
                     .prepareStatement("select * from CLIENT where IdClient = ?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Client user = null;
+            Client client = null;
             if (resultSet.next()) {
-                user = new Client();
-                user.setIdClient(resultSet.getLong("IdClient"));
-                user.setFirstName(resultSet.getString("FirstName"));
-                user.setLastName(resultSet.getString("LastName"));
+                client = new Client();
+                client.setIdClient(resultSet.getLong("IdClient"));
+                client.setFirstName(resultSet.getString("FirstName"));
+                client.setLastName(resultSet.getString("LastName"));
             }
-            return Optional.ofNullable(user);
+            return Optional.ofNullable(client);
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.getById()");
+            System.out.println("Exception while execute ClientDAOImpl.getById()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -85,7 +85,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
                 clients.add(client);
             }
         } catch (Throwable e) {
-            System.out.println("Exception while getting customer list UserDAOImpl.getList()");
+            System.out.println("Exception while getting customer list ClientDAOImpl.getList()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -103,7 +103,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.delete()");
+            System.out.println("Exception while execute ClientDAOImpl.delete()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -127,7 +127,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
             preparedStatement.setLong(3, client.getIdClient());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.update()");
+            System.out.println("Exception while execute ClientDAOImpl.update()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {

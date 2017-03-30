@@ -34,7 +34,7 @@ public class AccountDAOImpl extends DAOImpl implements AccountDAO {
                 account.setIdClient(rs.getLong(1));
             }
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.save()");
+            System.out.println("Exception while execute AccountDAOImpl.save()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -65,7 +65,7 @@ public class AccountDAOImpl extends DAOImpl implements AccountDAO {
             }
             return Optional.ofNullable(account);
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.getById()");
+            System.out.println("Exception while execute AccountDAOImpl.getById()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -91,7 +91,7 @@ public class AccountDAOImpl extends DAOImpl implements AccountDAO {
                 accounts.add(account);
             }
         } catch (Throwable e) {
-            System.out.println("Exception while getting customer list UserDAOImpl.getList()");
+            System.out.println("Exception while getting customer list AccountDAOImpl.getList()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -109,7 +109,7 @@ public class AccountDAOImpl extends DAOImpl implements AccountDAO {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.delete()");
+            System.out.println("Exception while execute AccountDAOImpl.delete()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
@@ -129,12 +129,12 @@ public class AccountDAOImpl extends DAOImpl implements AccountDAO {
                     .prepareStatement("update ACCOUNT set idClient = ?, AccountNumber = ?, Balance = ? , Sts = ?  " +
                             "where IdAccount = ?");
             preparedStatement.setLong(1, account.getIdClient());
+            preparedStatement.setString(2, account.getAccountNumber());
             preparedStatement.setDouble(3, account.getBalance());
-            preparedStatement.setDouble(3, account.getBalance());
-            preparedStatement.setString(3, account.getSts());
+            preparedStatement.setString(4, account.getSts());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.update()");
+            System.out.println("Exception while execute AccountDAOImpl.update()");
             e.printStackTrace();
             throw new DBException(e);
         } finally {
