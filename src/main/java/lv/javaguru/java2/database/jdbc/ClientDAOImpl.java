@@ -23,9 +23,10 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into CLIENT values (default, ?, ?, 0)", PreparedStatement.RETURN_GENERATED_KEYS);
+                    connection.prepareStatement("insert into CLIENT values (default, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, client.getFirstName());
             preparedStatement.setString(2, client.getLastName());
+            preparedStatement.setString(3, client.getSts());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -58,6 +59,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
                 client.setIdClient(resultSet.getLong("IdClient"));
                 client.setFirstName(resultSet.getString("FirstName"));
                 client.setLastName(resultSet.getString("LastName"));
+                client.setSts(resultSet.getString("Sts"));
             }
             return Optional.ofNullable(client);
         } catch (Throwable e) {
@@ -82,6 +84,7 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
                 client.setIdClient(resultSet.getLong("IdClient"));
                 client.setFirstName(resultSet.getString("FirstName"));
                 client.setLastName(resultSet.getString("LastName"));
+                client.setSts(resultSet.getString("Sts"));
                 clients.add(client);
             }
         } catch (Throwable e) {
@@ -120,11 +123,12 @@ public class ClientDAOImpl extends DAOImpl implements ClientDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update CLIENT set FirstName = ?, LastName = ? " +
+                    .prepareStatement("update CLIENT set FirstName = ?, LastName = ?, Sts = ? " +
                             "where IdClient = ?");
             preparedStatement.setString(1, client.getFirstName());
             preparedStatement.setString(2, client.getLastName());
-            preparedStatement.setLong(3, client.getIdClient());
+            preparedStatement.setString(3, client.getSts());
+            preparedStatement.setLong(4, client.getIdClient());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute ClientDAOImpl.update()");

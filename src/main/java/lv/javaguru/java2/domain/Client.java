@@ -7,6 +7,7 @@ public class Client {
     private long idClient;
     private String firstName;
     private String lastName;
+    private String sts;
 
 
     public long getIdClient() {
@@ -33,7 +34,9 @@ public class Client {
         this.lastName = lastName;
     }
 
+    public String getSts() { return sts; }
 
-
-
+    public void setSts(String sts) {
+        this.sts = sts;
+    }
 }
