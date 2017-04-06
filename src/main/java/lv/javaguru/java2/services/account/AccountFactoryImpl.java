@@ -13,6 +13,7 @@ import static lv.javaguru.java2.domain.AccountBuilder.createAccount;
  */
 public class AccountFactoryImpl implements AccountFactory {
     private ClientDAOImpl clientDAO = new ClientDAOImpl();
+    private AccountValidatorImpl accountValidator = new AccountValidatorImpl();
 
     @Override
     public Account create(Long clientId) {
@@ -21,7 +22,9 @@ public class AccountFactoryImpl implements AccountFactory {
             throw new IllegalArgumentException("Client not found by id = " + clientId);
         }
 
-        Account account = createAccount().withAccountNumber("ZZZ").build();
+        accountValidator.validate("ZZZ", clientId, "N");
+
+        Account account = createAccount().withAccountNumber("ZZZ").withSts("N").withIdClient(clientId).build();
 
         return account;
     }
